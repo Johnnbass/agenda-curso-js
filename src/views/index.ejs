@@ -8,18 +8,47 @@
       <h1 class="text-center">Agenda</h1>
       <p class="text-center lead">Seus contatos estão abaixo.</p>
 
-      <%- include('includes/messages') %>
-
+      <%- include('includes/messages') %> <% if (contacts.length > 0) { %>
       <div class="table-responsive">
-        <table class="table my-3">
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+        <table class="table my-3 text-center">
+          <thead>
+            <tr style="font-weight: bold; font-size: 22px">
+              <td>Nome</td>
+              <td>Sobrenome</td>
+              <td>Telefone</td>
+              <td>E-mail</td>
+              <td>Ações</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% contacts.forEach(contact => { %>
+            <tr>
+              <td><%= contact.name %></td>
+              <td><%= contact.lastname %></td>
+              <td><%= contact.phone %></td>
+              <td><%= contact.email %></td>
+              <td>
+                <a
+                  class="btn btn-primary"
+                  href="/contato/editar/<%= contact._id %>"
+                >
+                  Editar
+                </a>
+                <a
+                  class="btn btn-danger"
+                  href="/contato/delete/<%= contact._id %>"
+                >
+                  Excluir
+                </a>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
         </table>
       </div>
+      <% } else { %>
+      <h5 class="text-center">Não há contatos cadastrados.</h5>
+      <% } %>
     </div>
 
     <div class="col-lg-2"></div>

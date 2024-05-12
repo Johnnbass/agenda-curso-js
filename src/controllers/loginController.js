@@ -19,13 +19,12 @@ exports.register = async (req, res) => {
     }
 
     req.flash("success", ["Seu usuário foi cadastrado com sucesso."]);
-
     req.session.save(() => {
       return res.redirect("/login/index");
     });
   } catch (err) {
     console.error(err);
-    return res.render("404");
+    return res.render("500");
   }
 };
 
@@ -44,13 +43,12 @@ exports.logon = async (req, res) => {
 
     req.flash("success", ["Você entrou no sistema."]);
     req.session.user = login.user;
-
     req.session.save(() => {
       return res.redirect("/home/index");
     });
   } catch (err) {
     console.error(err);
-    return res.render("404");
+    return res.render("500");
   }
 };
 

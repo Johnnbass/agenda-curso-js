@@ -8,13 +8,14 @@ mongoose
   .connect(process.env.CONNECTIONSTRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   })
   .then(() => {
     app.emit("pronto");
   })
   .catch((e) => console.log(e));
 
-mongoose.connection.useDb('AGENDA');
+mongoose.connection.useDb("AGENDA");
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -61,8 +62,8 @@ app.use(csrfMiddleware);
 app.use(routes);
 
 app.on("pronto", () => {
-  app.listen(3000, () => {
-    console.log("Acessar http://localhost:3000");
-    console.log("Servidor executando na porta 3000");
+  app.listen(3001, () => {
+    console.log("Acessar http://localhost:3001");
+    console.log("Servidor executando na porta 3001.");
   });
 });
